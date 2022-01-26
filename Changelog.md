@@ -1,11 +1,16 @@
 [//]: # ( All notable changes to this project will be documented in this file. )
 [//]: # ( Encoding: UTF-8 No BOM )
-[//]: # ( ## 2022-01-26   ### Changed   ### Fixed   ### Added   ### Removed )
+[//]: # ( ## 2022-01-26   ### Changed   ### Fixed   ### Added   ### Removed   ### Update )
 [//]: # ( Entries may not always be in chronological/commit order. )
 [//]: # ( Others according to Markdown specifications. )
 
-# Changelog hb-sdl_ttf
+# Changelog hb-cairo
 
+## 2022-01-27
+
+### Update
+
+   - hb-cairo/examples/example_00.prg
 
 ## 2022-01-26
 

@@ -2,19 +2,19 @@
  *
  */
 
-#include "hbcairo.ch"
+#include "hbglfw.ch"
+
+REQUEST HB_CODEPAGE_UTF8EX
 
 FUNCTION Main()
 
    LOCAL pWindow
-   LOCAL nWidth
-	LOCAL nHeight
+   LOCAL nBufferWidth
+	LOCAL nBufferHeight
 	LOCAL pXdisplay
 	LOCAL nXwindow
 	LOCAL pSurface
 	LOCAL pCairo
-
-   LOCAL cText := "GLFW .AND. Cairo"
 
    IF( glfwInit() < 0 )
       OutStd( e"Unable to initialize Init: \n" )
@@ -23,7 +23,7 @@ FUNCTION Main()
 
    glfwWindowHint( GLFW_CLIENT_API, GLFW_NO_API )
 
-   pWindow := glfwCreateWindow( 720, 450, cText, NIL, NIL )
+   pWindow := glfwCreateWindow( 720, 450, "GLFW .AND. Cairo", NIL, NIL )
    IF( pWindow == NIL )
       OutStd( e"Unable to initialize Window: \n" )
       glfwTerminate()
@@ -32,7 +32,7 @@ FUNCTION Main()
 
    glfwSwapInterval( 1 )
 
-   glfwGetFramebufferSize( pWindow, @nWidth, @nHeight )
+   glfwGetFramebufferSize( pWindow, @nBufferWidth, @nBufferHeight )
 
    pXdisplay := glfwGetX11Display()
    IF( pXdisplay == NIL )
@@ -42,14 +42,16 @@ FUNCTION Main()
    ENDIF
 
    nXwindow := glfwGetX11Window( pWindow )
-   pSurface  := hb_cairo_xlib_surface_create( pXdisplay, nXwindow, nWidth, nHeight )
 
+   pSurface  := hb_cairo_xlib_surface_create( pXdisplay, nXwindow, nBufferWidth, nBufferHeight )
    pCairo := cairo_create( pSurface )
+
+   glfwSetKeyCallback( pWindow, @key_callback() )
 
    DO WHILE( glfwWindowShouldClose( pWindow ) == 0 )
 
-      glfwGetFramebufferSize( pWindow, @nWidth, @nHeight )
-      cairo_xlib_surface_set_size( pSurface, nWidth, nHeight )
+      glfwGetFramebufferSize( pWindow, @nBufferWidth, @nBufferHeight )
+      cairo_xlib_surface_set_size( pSurface, nBufferWidth, nBufferHeight )
 
       cairo_push_group( pCairo )
 
@@ -57,15 +59,15 @@ FUNCTION Main()
       cairo_set_operator( pCairo, CAIRO_OPERATOR_SOURCE )
       cairo_paint( pCairo )
       //---
-      cairo_select_font_face( pCairo, "Monospac", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL )
-      cairo_set_font_size( pCairo, 42 )
-      cairo_set_source_rgb( pCairo, 0, 0, 0 )
+      cairo_select_font_face( pCairo, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD )
+      cairo_set_font_size( pCairo, 36 )
+      cairo_set_source_rgb( pCairo, 1, 0, 0 )
+      cairo_move_to( pCairo, 10, 200 )
+      cairo_show_text( pCairo, "Hello! - Harbour development" )
 
-      nWidth  := ( nWidth - Len( ctext ) ) / 2
-      nHeight := nWidth / 2
-
-      cairo_move_to( pCairo, nWidth, nHeight )
-      cairo_show_text( pCairo, cText )
+      cairo_set_source_rgb( pCairo, 0, 0, 1 )
+      cairo_move_to( pCairo, 10, 240 )
+      cairo_show_text( pCairo, "https://github.com/dev-harbour" )
       //---
       cairo_pop_group_to_source( pCairo )
       cairo_paint( pCairo )
@@ -83,3 +85,14 @@ FUNCTION Main()
    glfwTerminate()
 
    RETURN 0
+
+STATIC PROCEDURE key_callback( pWindows, key, scancode, action, mods )
+
+   UNUSED( scancode )
+   UNUSED( mods )
+
+   IF key == GLFW_KEY_ESCAPE .AND. action == GLFW_PRESS
+      glfwSetWindowShouldClose( pWindows, GLFW_TRUE )
+   ENDIF
+
+   RETURN
