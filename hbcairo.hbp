@@ -1,0 +1,30 @@
+# Project build file
+
+-hblib
+-inc
+
+-olib/${hb_plat}/${hb_comp}/${hb_name}
+
+-w3 -es2 -gc3
+
+-depurlbase=cairo:https://cairographics.org/download/
+-depurlbase=cairo:https://gitlab.freedesktop.org/cairo/cairo
+-depkeyhead=cairo:cairo.h
+-depcontrol=cairo:${HB_WITH_CAIRO}
+-depincpath=cairo:/usr/include/cairo
+-depincpath=cairo:/usr/local/include/cairo
+-depincpath=cairo:/usr/local/opt/cairo/include/cairo
+-depimplibs=cairo:../bin/libcairo-2.dll
+-depimplibs=cairo:../lib/libcairo.dll.a
+-depimplibd=cairo:cairo
+-depfinish=cairo
+
+-iinclude
+
+-hbx=include/${hb_name}.hbx
+
+src/*.c
+src/*.prg
+
+$hb_pkg_dynlib.hbm
+$hb_pkg_install.hbm
