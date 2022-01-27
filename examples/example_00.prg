@@ -9,12 +9,12 @@ REQUEST HB_CODEPAGE_UTF8EX
 FUNCTION Main()
 
    LOCAL pWindow
-   LOCAL nBufferWidth
-	LOCAL nBufferHeight
-	LOCAL pXdisplay
-	LOCAL nXwindow
-	LOCAL pSurface
-	LOCAL pCairo
+   LOCAL nWidth
+   LOCAL nHeight
+   LOCAL pXdisplay
+   LOCAL nXwindow
+   LOCAL pSurface
+   LOCAL pCairo
 
    IF( glfwInit() < 0 )
       OutStd( e"Unable to initialize Init: \n" )
@@ -32,7 +32,7 @@ FUNCTION Main()
 
    glfwSwapInterval( 1 )
 
-   glfwGetFramebufferSize( pWindow, @nBufferWidth, @nBufferHeight )
+   glfwGetFramebufferSize( pWindow, @nWidth, @nHeight )
 
    pXdisplay := glfwGetX11Display()
    IF( pXdisplay == NIL )
@@ -43,15 +43,15 @@ FUNCTION Main()
 
    nXwindow := glfwGetX11Window( pWindow )
 
-   pSurface  := hb_cairo_xlib_surface_create( pXdisplay, nXwindow, nBufferWidth, nBufferHeight )
+   pSurface  := hb_cairo_xlib_surface_create( pXdisplay, nXwindow, nWidth, nHeight )
    pCairo := cairo_create( pSurface )
 
    glfwSetKeyCallback( pWindow, @key_callback() )
 
    DO WHILE( glfwWindowShouldClose( pWindow ) == 0 )
 
-      glfwGetFramebufferSize( pWindow, @nBufferWidth, @nBufferHeight )
-      cairo_xlib_surface_set_size( pSurface, nBufferWidth, nBufferHeight )
+      glfwGetFramebufferSize( pWindow, @nWidth, @nHeight )
+      cairo_xlib_surface_set_size( pSurface, nWidth, nHeight )
 
       cairo_push_group( pCairo )
 
