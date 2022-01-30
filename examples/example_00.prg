@@ -4,8 +4,6 @@
 
 #include "hbglfw.ch"
 
-REQUEST HB_CODEPAGE_UTF8EX
-
 FUNCTION Main()
 
    LOCAL pWindow
@@ -15,9 +13,12 @@ FUNCTION Main()
    LOCAL nXwindow
    LOCAL pSurface
    LOCAL pCairo
+   LOCAL aExtents
+   LOCAL cText := "https://github.com/dev-harbour"
 
    IF( glfwInit() < 0 )
       OutStd( e"Unable to initialize Init: \n" )
+      glfwTerminate()
       RETURN -1
    ENDIF
 
@@ -42,9 +43,9 @@ FUNCTION Main()
    ENDIF
 
    nXwindow := glfwGetX11Window( pWindow )
+   pSurface := hb_cairo_xlib_surface_create( pXdisplay, nXwindow, nWidth, nHeight )
 
-   pSurface  := hb_cairo_xlib_surface_create( pXdisplay, nXwindow, nWidth, nHeight )
-   pCairo := cairo_create( pSurface )
+   pCairo   := cairo_create( pSurface )
 
    glfwSetKeyCallback( pWindow, @key_callback() )
 
@@ -59,15 +60,14 @@ FUNCTION Main()
       cairo_set_operator( pCairo, CAIRO_OPERATOR_SOURCE )
       cairo_paint( pCairo )
       //---
-      cairo_select_font_face( pCairo, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD )
+      cairo_select_font_face( pCairo, "FreeMono", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD )
       cairo_set_font_size( pCairo, 36 )
-      cairo_set_source_rgb( pCairo, 1, 0, 0 )
-      cairo_move_to( pCairo, 10, 200 )
-      cairo_show_text( pCairo, "Hello! - Harbour development" )
+
+      aExtents := cairo_text_extents( pCairo, cText )
 
       cairo_set_source_rgb( pCairo, 0, 0, 1 )
-      cairo_move_to( pCairo, 10, 240 )
-      cairo_show_text( pCairo, "https://github.com/dev-harbour" )
+      cairo_move_to( pCairo, ( nWidth - aExtents[ WIDTH ] ) / 2, nHeight / 2 )
+      cairo_show_text( pCairo, cText )
       //---
       cairo_pop_group_to_source( pCairo )
       cairo_paint( pCairo )

@@ -2,7 +2,7 @@
  * Cairo library: cairo.c
  * version 2.0.16
  *
- * Copyright © 2022 dev-harbour 
+ * Copyright © 2022 dev-harbour
  *
  */
 
@@ -320,7 +320,22 @@ HB_FUNC( CAIRO_SET_SOURCE_RGBA )
 // cairo_public void cairo_set_tolerance (cairo_t *cr, double tolerance);
 // cairo_public void cairo_set_antialias (cairo_t *cr, cairo_antialias_t antialias);
 // cairo_public void cairo_set_fill_rule (cairo_t *cr, cairo_fill_rule_t fill_rule);
+
 // cairo_public void cairo_set_line_width (cairo_t *cr, double width);
+HB_FUNC( CAIRO_SET_LINE_WIDTH )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_set_line_width( cr, hb_parnd( 2 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_set_line_cap (cairo_t *cr, cairo_line_cap_t line_cap);
 // cairo_public void cairo_set_line_join (cairo_t *cr, cairo_line_join_t line_join);
 // cairo_public void cairo_set_dash (cairo_t *cr, const double *dashes, int num_dashes, double offset);
@@ -355,16 +370,197 @@ HB_FUNC( CAIRO_MOVE_TO )
 }
 
 // cairo_public void cairo_new_sub_path (cairo_t *cr);
+HB_FUNC( CAIRO_NEW_SUB_PATH )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr )
+   {
+      cairo_new_sub_path( cr );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_line_to (cairo_t *cr, double x, double y);
+HB_FUNC( CAIRO_LINE_TO )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_line_to( cr, hb_parnd( 2 ), hb_parnd( 3 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_curve_to (cairo_t *cr, double x1, double y1, double x2, double y2, double x3, double y3);
+HB_FUNC( CAIRO_CURVE_TO )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 4, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 5, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 6, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 7, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_curve_to( cr, hb_parnd( 2 ), hb_parnd( 3 ), hb_parnd( 4 ), hb_parnd( 5 ), hb_parnd( 6 ), hb_parnd( 7 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_arc (cairo_t *cr, double xc, double yc, double radius, double angle1, double angle2);
+HB_FUNC( CAIRO_ARC )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 4, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 5, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 6, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_arc( cr, hb_parnd( 2 ), hb_parnd( 3 ), hb_parnd( 4 ), hb_parnd( 5 ), hb_parnd( 6 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_arc_negative (cairo_t *cr, double xc, double yc, double radius, double angle1, double angle2);
+HB_FUNC( CAIRO_ARC_NEGATIVE )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 4, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 5, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 6, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_arc_negative( cr, hb_parnd( 2 ), hb_parnd( 3 ), hb_parnd( 4 ), hb_parnd( 5 ), hb_parnd( 6 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_rel_move_to (cairo_t *cr, double dx, double dy);
+HB_FUNC( CAIRO_REL_MOVE_TO )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_rel_move_to( cr, hb_parnd( 2 ), hb_parnd( 3 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_rel_line_to (cairo_t *cr, double dx, double dy);
+HB_FUNC( CAIRO_REL_LINE_TO )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_rel_line_to( cr, hb_parnd( 2 ), hb_parnd( 3 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_rel_curve_to (cairo_t *cr, double dx1, double dy1, double dx2, double dy2, double dx3, double dy3);
+HB_FUNC( CAIRO_REL_CURVE_TO )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 4, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 5, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 6, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 7, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_rel_curve_to( cr, hb_parnd( 2 ), hb_parnd( 3 ), hb_parnd( 4 ), hb_parnd( 5 ), hb_parnd( 6 ), hb_parnd( 7 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_rectangle (cairo_t *cr, double x, double y, double width, double height);
+HB_FUNC( CAIRO_RECTANGLE )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 4, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 5, HB_IT_NUMERIC ) != NULL )
+   {
+      cairo_rectangle( cr, hb_parnd( 2 ), hb_parnd( 3 ), hb_parnd( 4 ), hb_parnd( 5 ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_close_path (cairo_t *cr);
+HB_FUNC( CAIRO_CLOSE_PATH )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr )
+   {
+      cairo_close_path( cr );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_path_extents (cairo_t *cr, double *x1, double *y1, double *x2, double *y2);
+HB_FUNC( CAIRO_PATH_EXTENTS )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_BYREF ) != NULL &&
+             hb_param( 3, HB_IT_BYREF ) != NULL &&
+             hb_param( 4, HB_IT_BYREF ) != NULL &&
+             hb_param( 5, HB_IT_BYREF ) != NULL )
+   {
+      double x1, y1, x2, y2;
+      cairo_path_extents( cr, &x1, &y1, &x2, &y2 );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
 
 // cairo_public void cairo_paint (cairo_t *cr);
 HB_FUNC( CAIRO_PAINT )
@@ -384,17 +580,96 @@ HB_FUNC( CAIRO_PAINT )
 // cairo_public void cairo_paint_with_alpha (cairo_t *cr, double alpha);
 // cairo_public void cairo_mask (cairo_t *cr, cairo_pattern_t *pattern);
 // cairo_public void cairo_mask_surface (cairo_t *cr, cairo_surface_t *surface, double surface_x, double surface_y);
+
 // cairo_public void cairo_stroke (cairo_t *cr);
+HB_FUNC( CAIRO_STROKE )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr )
+   {
+      cairo_stroke( cr );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_stroke_preserve (cairo_t *cr);
+
 // cairo_public void cairo_fill (cairo_t *cr);
+HB_FUNC( CAIRO_FILL )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr )
+   {
+      cairo_fill( cr );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_fill_preserve (cairo_t *cr);
+HB_FUNC( CAIRO_FILL_PRESERVE )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr )
+   {
+      cairo_fill_preserve( cr );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_copy_page (cairo_t *cr);
 // cairo_public void cairo_show_page (cairo_t *cr);
 // cairo_public cairo_bool_t cairo_in_stroke (cairo_t *cr, double x, double y);
+
 // cairo_public cairo_bool_t cairo_in_fill (cairo_t *cr, double x, double y);
+HB_FUNC( CAIRO_IN_FILL )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_NUMERIC ) != NULL &&
+             hb_param( 3, HB_IT_NUMERIC ) != NULL )
+   {
+      hb_retl( cairo_in_fill( cr, hb_parnd( 2 ), hb_parnd( 3 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public cairo_bool_t cairo_in_clip (cairo_t *cr, double x, double y);
 // cairo_public void cairo_stroke_extents (cairo_t *cr, double *x1, double *y1, double *x2, double *y2);
+
 // cairo_public void cairo_fill_extents (cairo_t *cr, double *x1, double *y1, double *x2, double *y2);
+HB_FUNC( CAIRO_FILL_EXTENTS )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr && hb_param( 2, HB_IT_BYREF ) != NULL &&
+             hb_param( 3, HB_IT_BYREF ) != NULL &&
+             hb_param( 4, HB_IT_BYREF ) != NULL &&
+             hb_param( 5, HB_IT_BYREF ) != NULL )
+   {
+      double x1, y1, x2, y2;
+      cairo_fill_extents( cr, &x1, &y1, &x2, &y2 );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_reset_clip (cairo_t *cr);
 // cairo_public void cairo_clip (cairo_t *cr);
 // cairo_public void cairo_clip_preserve (cairo_t *cr);
@@ -475,8 +750,7 @@ HB_FUNC( CAIRO_SHOW_TEXT )
 {
    cairo_t * cr = hb_cairo_Param( 1 );
 
-   if( cr &&
-      hb_param( 2, HB_IT_STRING ) != NULL )
+   if( cr && hb_param( 2, HB_IT_STRING ) != NULL )
    {
       void * text;
       cairo_show_text( cr, hb_parstr_utf8( 2, &text, NULL ) );
@@ -492,7 +766,34 @@ HB_FUNC( CAIRO_SHOW_TEXT )
 // cairo_public void cairo_show_text_glyphs (cairo_t *cr, const char *utf8, int utf8_len, const cairo_glyph_t *glyphs, int num_glyphs, const cairo_text_cluster_t *clusters, int num_clusters, cairo_text_cluster_flags_t cluster_flags);
 // cairo_public void cairo_text_path (cairo_t *cr, const char *utf8);
 // cairo_public void cairo_glyph_path (cairo_t *cr, const cairo_glyph_t *glyphs, int num_glyphs);
+
 // cairo_public void cairo_text_extents (cairo_t *cr, const char *utf8, cairo_text_extents_t *extents);
+HB_FUNC( CAIRO_TEXT_EXTENTS )
+{
+   cairo_t * pCairo = hb_cairo_Param( 1 );
+
+   if( pCairo && hb_param( 2, HB_IT_STRING ) != NULL )
+   {
+      cairo_text_extents_t extents;
+
+      void * text;
+      cairo_text_extents( pCairo, hb_parstr_utf8( 2, &text, NULL ), &extents );
+      hb_strfree( text );
+
+      hb_reta( 6 );
+      hb_storvnl( extents.x_bearing,  -1, 1 );
+      hb_storvnl( extents.y_bearing,  -1, 2 );
+      hb_storvnl( extents.width,      -1, 3 );
+      hb_storvnl( extents.height,     -1, 4 );
+      hb_storvnl( extents.x_advance,  -1, 5 );
+      hb_storvnl( extents.y_advance,  -1, 6 );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public void cairo_glyph_extents (cairo_t *cr, const cairo_glyph_t *glyphs, int num_glyphs, cairo_text_extents_t *extents);
 // cairo_public void cairo_font_extents (cairo_t *cr, cairo_font_extents_t *extents);
 // cairo_public cairo_font_face_t * cairo_font_face_reference (cairo_font_face_t *font_face);
@@ -538,7 +839,22 @@ HB_FUNC( CAIRO_SHOW_TEXT )
 // cairo_public cairo_antialias_t cairo_get_antialias (cairo_t *cr);
 // cairo_public cairo_bool_t cairo_has_current_point (cairo_t *cr);
 // cairo_public void cairo_get_current_point (cairo_t *cr, double *x, double *y);
+
 // cairo_public cairo_fill_rule_t cairo_get_fill_rule (cairo_t *cr);
+HB_FUNC( CAIRO_GET_FILL_RULE )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr )
+   {
+      hb_retni( cairo_get_fill_rule( cr ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public double cairo_get_line_width (cairo_t *cr);
 // cairo_public cairo_line_cap_t cairo_get_line_cap (cairo_t *cr);
 // cairo_public cairo_line_join_t cairo_get_line_join (cairo_t *cr);

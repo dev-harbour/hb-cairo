@@ -6,11 +6,36 @@
 
 # Changelog hb-cairo
 
-## 2022-01-27
+## 2022-01-30
 
 ### Update
 
+   - hb-cairo/include/hbcairo.ch
+   - hb-cairo/src/cairo.c
    - hb-cairo/examples/example_00.prg
+
+### Added
+
+   - cairo_text_extents()
+      > The function returns an array
+   - cairo_new_sub_path()
+   - cairo_line_to()
+   - cairo_curve_to()
+   - cairo_arc()
+   - cairo_arc_negative()
+   - cairo_rel_move_to()
+   - cairo_rel_line_to()
+   - cairo_rel_curve_to()
+   - cairo_rectangle()
+   - cairo_close_path()
+   - cairo_path_extents()
+   - cairo_fill()
+   - cairo_fill_preserve()
+   - cairo_in_fill()
+   - cairo_fill_extents()
+   - cairo_get_fill_rule()
+   - cairo_stroke()
+   - cairo_set_line_width()
 
 ## 2022-01-26
 

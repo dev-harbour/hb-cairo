@@ -224,4 +224,12 @@
 #define CAIRO_REGION_OVERLAP_PART              2  /* partly inside region */
 /* End cairo.h */
 
+/* cairo_text_extents_t */
+#define X_BEARING                              1
+#define Y_BEARING                              2
+#define WIDTH                                  3
+#define HEIGHT                                 4
+#define X_ADVANCE                              5
+#define Y_ADVANCE                              6
+/* End cairo_text_extents_t */
 #endif /* HBCAIRO_CH_ */
