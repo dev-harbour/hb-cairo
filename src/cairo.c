@@ -2,7 +2,8 @@
  * Cairo library: cairo.c
  * version 2.0.16
  *
- * Copyright © 2022 dev-harbour
+ * Copyright 2022 Rafał Jopek ( rafaljopek at hotmail com )
+ * Copyright 2022 dev-harbour
  *
  */
 
@@ -770,23 +771,23 @@ HB_FUNC( CAIRO_SHOW_TEXT )
 // cairo_public void cairo_text_extents (cairo_t *cr, const char *utf8, cairo_text_extents_t *extents);
 HB_FUNC( CAIRO_TEXT_EXTENTS )
 {
-   cairo_t * pCairo = hb_cairo_Param( 1 );
+   cairo_t * cr = hb_cairo_Param( 1 );
 
-   if( pCairo && hb_param( 2, HB_IT_STRING ) != NULL )
+   if( cr && hb_param( 2, HB_IT_STRING ) != NULL )
    {
       cairo_text_extents_t extents;
 
       void * text;
-      cairo_text_extents( pCairo, hb_parstr_utf8( 2, &text, NULL ), &extents );
+      cairo_text_extents( cr, hb_parstr_utf8( 2, &text, NULL ), &extents );
       hb_strfree( text );
 
       hb_reta( 6 );
-      hb_storvnl( extents.x_bearing,  -1, 1 );
-      hb_storvnl( extents.y_bearing,  -1, 2 );
-      hb_storvnl( extents.width,      -1, 3 );
-      hb_storvnl( extents.height,     -1, 4 );
-      hb_storvnl( extents.x_advance,  -1, 5 );
-      hb_storvnl( extents.y_advance,  -1, 6 );
+      hb_storvnd( extents.x_bearing,  -1, 1 );
+      hb_storvnd( extents.y_bearing,  -1, 2 );
+      hb_storvnd( extents.width,      -1, 3 );
+      hb_storvnd( extents.height,     -1, 4 );
+      hb_storvnd( extents.x_advance,  -1, 5 );
+      hb_storvnd( extents.y_advance,  -1, 6 );
    }
    else
    {
@@ -795,7 +796,31 @@ HB_FUNC( CAIRO_TEXT_EXTENTS )
 }
 
 // cairo_public void cairo_glyph_extents (cairo_t *cr, const cairo_glyph_t *glyphs, int num_glyphs, cairo_text_extents_t *extents);
+
 // cairo_public void cairo_font_extents (cairo_t *cr, cairo_font_extents_t *extents);
+HB_FUNC( CAIRO_FONT_EXTENTS )
+{
+   cairo_t * cr = hb_cairo_Param( 1 );
+
+   if( cr )
+   {
+      cairo_font_extents_t extents;
+
+      cairo_font_extents( cr, &extents );
+
+      hb_reta( 5 );
+      hb_storvnd( extents.ascent,        -1, 1 );
+      hb_storvnd( extents.descent,       -1, 2 );
+      hb_storvnd( extents.height,        -1, 3 );
+      hb_storvnd( extents.max_x_advance, -1, 4 );
+      hb_storvnd( extents.max_y_advance, -1, 5 );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // cairo_public cairo_font_face_t * cairo_font_face_reference (cairo_font_face_t *font_face);
 // cairo_public void cairo_font_face_destroy (cairo_font_face_t *font_face);
 // cairo_public unsigned int cairo_font_face_get_reference_count (cairo_font_face_t *font_face);
