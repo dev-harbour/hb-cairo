@@ -2,7 +2,8 @@
  * Cairo library: cairo-xlib.c
  * version 2.0.16
  *
- * Copyright © 2022 dev-harbour 
+ * Copyright 2022 Rafał Jopek ( rafaljopek at hotmail com )
+ * Copyright 2022 dev-harbour
  *
  */
 
@@ -65,6 +66,10 @@ HB_FUNC( CAIRO_XLIB_SURFACE_SET_SIZE )
 // cairo_public void cairo_xlib_device_debug_cap_xrender_version (cairo_device_t *device, int major_version, int minor_version);
 // cairo_public void cairo_xlib_device_debug_set_precision (cairo_device_t *device, int precision);
 // cairo_public int cairo_xlib_device_debug_get_precision (cairo_device_t *device);
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* Harbour implementation */
+// void cairo_close_x11_surface( cairo_surface_t * sfc )
 
 CAIRO_END_DECLS
 
