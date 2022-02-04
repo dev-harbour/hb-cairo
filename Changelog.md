@@ -12,6 +12,22 @@
 
    - hb-cairo/include/hbcairo.ch
    - hb-cairo/src/cairo.c
+
+
+### Added
+
+   - cairo_font_extents()
+
+### Fixed
+
+   - cairo_text_extents()
+
+## 2022-01-30
+
+### Update
+
+   - hb-cairo/include/hbcairo.ch
+   - hb-cairo/src/cairo.c
    - hb-cairo/examples/example_00.prg
 
 ### Added
