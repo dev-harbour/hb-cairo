@@ -225,11 +225,19 @@
 /* End cairo.h */
 
 /* cairo_text_extents_t */
-#define X_BEARING                              1
-#define Y_BEARING                              2
-#define WIDTH                                  3
-#define HEIGHT                                 4
-#define X_ADVANCE                              5
-#define Y_ADVANCE                              6
+#define TEXT_X_BEARING                         1
+#define TEXT_Y_BEARING                         2
+#define TEXT_WIDTH                             3
+#define TEXT_HEIGHT                            4
+#define TEXT_X_ADVANCE                         5
+#define TEXT_Y_ADVANCE                         6
 /* End cairo_text_extents_t */
+
+/* cairo_font_extents_t */
+#define FONT_ASCENT                            1
+#define FONT_DESCENT                           2
+#define FONT_HEIGHT                            3
+#define FONT_MAX_X_ADVANCE                     4
+#define FONT_MAX_Y_ADVANCE                     5
+/* End cairo_font_extents_t */
 #endif /* HBCAIRO_CH_ */
